@@ -2,7 +2,7 @@
 
 A simple python script for converting between floating point numbers of arbitrary base size and their decimal representation. 
 
-IEEE-754 formats are specified for special case numbers. (INF, NaN)
+Does not currently support IEEE-754 special formats (INF, NaN)
 
 Bases currently supported: 32, 16
 
