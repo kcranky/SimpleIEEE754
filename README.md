@@ -1,4 +1,4 @@
-# SimpleIEEE754
+# Simple IEEE-754
 
 A simple python script for converting between floating point numbers of arbitrary base size and their decimal representation. 
 
