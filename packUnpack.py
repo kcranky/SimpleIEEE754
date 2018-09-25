@@ -11,11 +11,9 @@ def get_dec_value(binVal, struct):
    sign = binVal[0]
    exponent = binVal[1:struct["EXPONENT_MSB"]+2]
    mantissa = binVal[struct["EXPONENT_MSB"]+2:struct["WORD_MSB"]+1]
-   #print(sign, exponent, mantissa)
    s = int(sign, 2)
    e = int(exponent, 2)
    m = parse_bin_frac("." + mantissa)
-   #print(s, e, m)
    result = pow(-1, s) * (1+m) * pow(2, e-struct["EXPONENT_BIAS"])  
    print("{} converted to   {}").format(binVal, result)
    return result
@@ -23,7 +21,6 @@ def get_dec_value(binVal, struct):
    
 def get_bin_value(decVal, struct):
    """Convert a decimal numner to n-bit floating point representation"""
-   #print("\nNEW CONVERSION\n")
    integer, frac = decVal.split(".")
    frac=float(frac)/pow(10,len(frac))
    
@@ -36,7 +33,6 @@ def get_bin_value(decVal, struct):
       t = ("{0:f}").format(float(frac)).split(".")
       print(t, f)
       f = str(f) + t[0]
-      #print(f, frac)
       frac = float(t[1])/pow(10,len(t[1]))
       if(int(float(t[1]))==0):
          break
