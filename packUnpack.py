@@ -20,6 +20,11 @@ def get_dec_value(binVal, struct):
    
 def get_bin_value(decVal, struct):
    """Convert a decimal numner to n-bit floating point representation"""
+   print(decVal)
+   # Convert the integer input into one which the program understands
+   decVal = str("{0:f}").format(float(decVal))
+   print(decVal)
+   # Process the value
    integer, frac = decVal.split(".")
    frac=float(frac)/pow(10,len(frac))
    
@@ -69,7 +74,8 @@ if __name__ == "__main__":
    #get_bin_value("-0.09375", Word16)
    #get_dec_value("1010111000000000", Word16)   
    
-   #get_bin_value("15.75", Word16)
+   get_bin_value(-15E-03, Word16)
+   get_dec_value("1010001100000000", Word16)
    #get_bin_value("-15.75", Word16)
 
    print("Finished")
