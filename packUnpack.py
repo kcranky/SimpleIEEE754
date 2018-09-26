@@ -1,6 +1,6 @@
 #Converter for arbitrary base floating points
 from struct import *
-from parameterDefinitions import Word32, Word16
+from parameterDefinitions import Word40, Word32, Word24, Word20, Word16, Word8
 
 def parse_bin_frac(s):
    return int(s[1:], 2) / 2.**(len(s) - 1)
@@ -21,9 +21,12 @@ def get_dec_value(binVal, struct):
    
 def get_bin_value(decVal, struct):
    """Convert a decimal numner to n-bit floating point representation"""
+   #TODO: Problem in exponents with negative numbers (see -15.75 with 32 bits)
    integer, frac = decVal.split(".")
    frac=float(frac)/pow(10,len(frac))
    
+   #Negative issue may be here!
+   integer = integer.replace('-','')
    i = bin(int(integer))[2:]
    f = ""
    
@@ -31,7 +34,6 @@ def get_bin_value(decVal, struct):
    for j in range(struct["MANTISSA_MSB"]):
       frac = float(frac*2)
       t = ("{0:f}").format(float(frac)).split(".")
-      print(t, f)
       f = str(f) + t[0]
       frac = float(t[1])/pow(10,len(t[1]))
       if(int(float(t[1]))==0):
@@ -66,11 +68,14 @@ def get_bin_value(decVal, struct):
    
   
 if __name__ == "__main__":
-   get_bin_value("-0.235", Word32)
-   get_dec_value("10111110011100001010001111010111", Word32)   
+   #get_bin_value("-0.235", Word32)
+   #get_dec_value("10111110011100001010001111010111", Word32)   
    
-   get_bin_value("-0.09375", Word16)
-   get_dec_value("1010111000000000", Word16)   
+   #get_bin_value("-0.09375", Word16)
+   #get_dec_value("1010111000000000", Word16)   
+   
+   get_bin_value("15.75", Word16)
+   get_bin_value("-15.75", Word16)
    
    print("Finished")
    
