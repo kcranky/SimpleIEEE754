@@ -18,14 +18,11 @@ def get_dec_value(binVal, struct):
    print("{} converted to   {}").format(binVal, result)
    return result
    
-   
 def get_bin_value(decVal, struct):
    """Convert a decimal numner to n-bit floating point representation"""
-   #TODO: Problem in exponents with negative numbers (see -15.75 with 32 bits)
    integer, frac = decVal.split(".")
    frac=float(frac)/pow(10,len(frac))
    
-   #Negative issue may be here!
    integer = integer.replace('-','')
    i = bin(int(integer))[2:]
    f = ""
@@ -48,24 +45,22 @@ def get_bin_value(decVal, struct):
        
    # Bias the exponent
    if (c != 0):
-         print("expc={}").format(c + struct["EXPONENT_BIAS"])
          exp = bin(c + struct["EXPONENT_BIAS"])
          exp = str(str(exp)[2:]).rjust(struct["EXPONENT_MSB"]+1,"0")
-         print("expc={}").format(exp)
-
    else:
       exp = bin(len(i)-1+struct["EXPONENT_BIAS"])[2:]
-     
+   
+   
    # Fill
    mantissa = str(str(mantissa)[1:]).ljust(struct["MANTISSA_MSB"]+1,"0")
    if (float(decVal) > 0):
       result = ("0"+exp+mantissa)[0:struct["WORD_MSB"]+1]
    else:
       result = ("1"+exp+mantissa)[0:struct["WORD_MSB"]+1]
-      
+   
+   
    print("{} converted from {}").format(result, decVal)
    return result
-   
   
 if __name__ == "__main__":
    #get_bin_value("-0.235", Word32)
@@ -74,8 +69,8 @@ if __name__ == "__main__":
    #get_bin_value("-0.09375", Word16)
    #get_dec_value("1010111000000000", Word16)   
    
-   get_bin_value("15.75", Word16)
-   get_bin_value("-15.75", Word16)
-   
+   #get_bin_value("15.75", Word16)
+   #get_bin_value("-15.75", Word16)
+
    print("Finished")
    
